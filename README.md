@@ -54,12 +54,14 @@
 
 
 ## **Handlers**
-||Название|Функционал|
-|-|-|-|
-|1|Handler_tilda|Искомые элементы: name, phone (обязательно), email, utm_source_ utm_campaign, utm_medium, utm_content, utm_term|
-|2|Handler_marquiz|Искомые элементы: 'contacts':'name', 'contacts':'phone' (обязательно), 'contacts':'email', 'utm_tags':'utm_source', 'utm_tags':'utm_campaign', 'utm_tags':'utm_medium', 'utm_tags':'utm_content', 'utm_tags':'utm_term'|
-|3|Handler_get_raw|Записывает полученный запрос в файл|
-|4|Handler_post_raw|Возвращает информацию из файла, заполненного Handler_get_raw|
+> **Note:** Проверка входящих данных, обработка, формирование ответа на запрос
+
+||Название|Проверяемые данные|Ответ|
+|-|-|-|-|
+|1|Handler_tilda|Искомые элементы: name, phone (обязательно), email, utm_source_ utm_campaign, utm_medium, utm_content, utm_term|JSON status: ok, message: "Данные получены"|
+|2|Handler_marquiz|Искомые элементы: 'contacts':'name', 'contacts':'phone' (обязательно), 'contacts':'email', 'utm_tags':'utm_source', 'utm_tags':'utm_campaign', 'utm_tags':'utm_medium', 'utm_tags':'utm_content', 'utm_tags':'utm_term'|JSON status: ok, message: "Данные получены"|
+|3|Handler_get_raw|-|Возвращает информацию из файла, заполненного Handler_get_raw
+|4|Handler_post_raw|Записывает полученный запрос в файл|JSON status: ok, message: "Данные получены"|
 
 ## **Transformers**
 > **Note:** Каждому из Handlers соответствует Transformers, который преобразует данные в соответствии с целевой структурой для исходящего запроса
@@ -118,6 +120,8 @@ Main ->> Handlers: Handler_post_raw
 Main ->> Handlers: Handler_get_raw
 Handlers ->> Transformers: Transformer_tilda
 Handlers ->> Transformers: Transformer_marquiz
+Handlers ->> Main: JSON (Message, Status)
+Main ->> Request: Response with JSON (Message, Status)
 Transformers ->> Sendler: send_to_Bitrix24
 Request ->> Sendler: "Logger: запись в б/д"
 Note right of Sendler: На основе записанных Logger'ом данных<br/>Exporter собирает метрики<br/>
