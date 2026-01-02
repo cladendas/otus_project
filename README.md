@@ -56,12 +56,12 @@
 ## **Handlers**
 > **Note:** Проверка входящих данных, обработка, формирование ответа на запрос
 
-||Название|Проверяемые данные|Ответ|
-|-|-|-|-|
-|1|Handler_tilda|Искомые элементы: name, phone (обязательно), email, utm_source_ utm_campaign, utm_medium, utm_content, utm_term|JSON status: ok, message: "Данные получены"|
-|2|Handler_marquiz|Искомые элементы: 'contacts':'name', 'contacts':'phone' (обязательно), 'contacts':'email', 'utm_tags':'utm_source', 'utm_tags':'utm_campaign', 'utm_tags':'utm_medium', 'utm_tags':'utm_content', 'utm_tags':'utm_term'|JSON status: ok, message: "Данные получены"|
-|3|Handler_get_raw|-|Возвращает информацию из файла, заполненного Handler_get_raw
-|4|Handler_post_raw|Записывает полученный запрос в файл|JSON status: ok, message: "Данные получены"|
+||Название|Проверяемые данные|Ответ (корректный запрос)| Ответ (некорректный запрос)|
+|-|-|-|-|-|
+|1|Handler_tilda|Искомые элементы: name, phone (обязательно), email, utm_source_ utm_campaign, utm_medium, utm_content, utm_term|Данные корректные: JSON status: ok, message: "Данные получены", code: 200|Данные не соответстсвуют требованиям: JSON status: error, message: "Данные не соответстсвуют требованиям", code: 400|
+|2|Handler_marquiz|Искомые элементы: 'contacts':'name', 'contacts':'phone' (обязательно), 'contacts':'email', 'utm_tags':'utm_source', 'utm_tags':'utm_campaign', 'utm_tags':'utm_medium', 'utm_tags':'utm_content', 'utm_tags':'utm_term'|Данные корректные: JSON status: ok, message: "Данные получены"| Данные не соответстсвуют требованиям: JSON status: error, message: "Данные не соответстсвуют требованиям", code: 400|
+|3|Handler_get_raw|-|Возвращает информацию из файла, заполненного Handler_get_raw|-|
+|4|Handler_post_raw|Нет проверки на корректность данных. Записывает полученный запрос в файл|JSON status: ok, message: "Данные получены"|-|
 
 ## **Transformers**
 > **Note:** Каждому из Handlers соответствует Transformers, который преобразует данные в соответствии с целевой структурой для исходящего запроса
