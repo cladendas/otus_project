@@ -43,23 +43,23 @@
 
 
 ## **Main**
-> **Note:** В соответствии с тем, на какой эндпоинт пришёл запрос, вызывается соответствующий из Handler
+> **Note:** В соответствии с тем, на какой эндпоинт пришёл запрос, вызывается соответствующий из Handlers
 
 ||Эндпоинт|Описание|Соответствующий handler|
 |-|-|-|-|
 |1|POST /tilda|принимает запросы с tilda|Handler_tilda|
-|2|POST /marquiz|принимает запросы с marquiz|Hadler_marquiz|
-|3|POST /raw|принимает запросы для целей изучения структуры|Hadler_get_raw|
-|4|GET /raw|возвращает информацию последнего запроса на POST /raw|Hadler_post_raw|
+|2|POST /marquiz|принимает запросы с marquiz|Handler_marquiz|
+|3|POST /raw|принимает запросы для целей изучения структуры|Handler_get_raw|
+|4|GET /raw|возвращает информацию последнего запроса на POST /raw|Handler_post_raw|
 
 
 ## **Handlers**
 ||Название|Функционал|
 |-|-|-|
 |1|Handler_tilda|Искомые элементы: name, phone (обязательно), email, utm_source_ utm_campaign, utm_medium, utm_content, utm_term|
-|2|Hadler_marquiz|Искомые элементы: 'contacts':'name', 'contacts':'phone' (обязательно), 'contacts':'email', 'utm_tags':'utm_source', 'utm_tags':'utm_campaign', 'utm_tags':'utm_medium', 'utm_tags':'utm_content', 'utm_tags':'utm_term'|
-|3|Hadler_get_raw|Записывает полученный запрос в файл|
-|4|Hadler_post_raw|Возвращает информацию из файла, заполненного Hadler_get_raw|
+|2|Handler_marquiz|Искомые элементы: 'contacts':'name', 'contacts':'phone' (обязательно), 'contacts':'email', 'utm_tags':'utm_source', 'utm_tags':'utm_campaign', 'utm_tags':'utm_medium', 'utm_tags':'utm_content', 'utm_tags':'utm_term'|
+|3|Handler_get_raw|Записывает полученный запрос в файл|
+|4|Handler_post_raw|Возвращает информацию из файла, заполненного Handler_get_raw|
 
 ## **Transformers**
 > **Note:** Каждому из Handlers соответствует Transformers, который преобразует данные в соответствии с целевой структурой для исходящего запроса
@@ -82,7 +82,7 @@
 ## **Sendler**
 > **Note:** Запрос делается на вебхук предоставленный Bitrix24
 > Один запрос = один лид
-> У Bitrix24 есть ограничение: не более 2 запросов в 1 сек, чтобы счётчик запросов успевал обнульяться (https://apidocs.bitrix24.ru/limits.html)
+> У Bitrix24 есть ограничение: не более 2 запросов в 1 сек, чтобы счётчик запросов успевал обнуляться (https://apidocs.bitrix24.ru/limits.html)
 > **На будущее:** Bitrix24 позволяет делать запросы пакетом. Это позволяет накопить лиды, а потом одним запросом отправить
 
 ## **Exporter**
