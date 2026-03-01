@@ -1,23 +1,27 @@
-#include <boost/json.hpp>
-#include <iostream>
-#include "../Responses.cpp"
+#include "Handler_tilda.h"
 
-namespace json = boost::json;
+json::object Handler_tilda::checkJsonPostJson(const json::value& jv) {
+    if (jv.is_object()) {
+        const json::object& lead = jv.as_object();
 
-struct Handler_tilda {
-    static bool checkJson(const json::value& jv) {
-        if (jv.is_object()) {
-            const json::object& lead = jv.as_object();
+        if (lead.count("phone")) {
 
-            if (lead.count("phone")) {
-                return true;
-            } else {
-                std::cerr << "Отсутствует phone\n";
-            }
+            auto targetLead = transformJson(lead);
+
+            //TODO: POST targetLead
+
+            std::cout << "POST\n";
+
+            std::string json_str = json::serialize(targetLead);
+            std::cout << json_str << std::endl;
+
+            return responseOk;
         } else {
-            std::cerr << "JSON должен быть объектом\n";
+            std::cerr << "Отсутствует phone\n";
         }
-
-        return false;
+    } else {
+        std::cerr << "JSON должен быть объектом\n";
     }
-};
+
+    return responseFalse;
+}

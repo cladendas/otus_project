@@ -1,15 +1,13 @@
-#include <boost/json.hpp>
+#include "Responses.h"
 
-namespace json = boost::json;
-
-json::object responseOk = {
+const json::object responseOk = {
     {"status", "ok"},
     {"message", "Данные получены"}, 
     {"code", 200}
 };
 
-json::object responseFalse = {
+const json::object responseFalse = {
     {"status", "error"},
-    {"message", "Данные не соответстсвуют требованиям"}, 
+    {"message", "Данные не соответствуют требованиям"}, 
     {"code", 400}
 };
