@@ -6,11 +6,11 @@ json::object Handler_tilda::checkJsonPostJson(const json::value& jv) {
 
         if (lead.count("phone")) {
 
-            auto targetLead = transformJson(lead);
+            auto targetLead = Transformer_tilda::transformJson(lead);
 
             //TODO: POST targetLead
 
-            std::cout << "POST\n";
+            std::cout << "POST tilda\n";
 
             std::string json_str = json::serialize(targetLead);
             std::cout << json_str << std::endl;

@@ -1,6 +1,6 @@
-#include "Transformer_tilda.h"
+#include "Transformer_marquiz.h"
 
-json::object Transformer_tilda::transformJson(const json::object& lead) {
+json::object Transformer_marquiz::transformJson(const json::object& lead) {
 
     json::object targetLead = targetStruct(
         lead.at("phone").as_string().c_str(),

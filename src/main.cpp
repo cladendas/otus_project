@@ -5,6 +5,7 @@
 #include <iostream>
 
 #include "Handlers/Handler_tilda.h"
+#include "Handlers/Handler_marquiz.h"
 
 namespace beast = boost::beast;
 namespace http = beast::http;
@@ -112,10 +113,14 @@ void start() {
 void test() {
     json::object lead = {
         {"phone", "232432"},
-        {"email", "7666@dfsrf.ewfe"}
+        {"email", "7666@dfsrf.ewfe"},
+        {"contacts", {
+            {"phone", "111111"}
+        }}
     };
 
     Handler_tilda::checkJsonPostJson(lead);
+    Handler_marquiz::checkJsonPostJson(lead);
 
     // std::string json_str = json::serialize(lead);
     // std::cout << json_str << std::endl;
