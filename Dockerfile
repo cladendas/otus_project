@@ -1,5 +1,4 @@
-# Используем официальный образ с поддержкой ARM64 для M1
-FROM arm64v8/ubuntu:22.04
+FROM ubuntu:24.04
 
 # Устанавливаем необходимые пакеты
 RUN apt-get update && apt-get install -y \
@@ -10,11 +9,9 @@ RUN apt-get update && apt-get install -y \
     curl \
     tar \
     gzip \
-    && rm -rf /var/lib/apt/lists/*
-
-# Устанавливаем Boost
-RUN apt-get update && apt-get install -y \
     libboost-all-dev \
+    sqlite3 \
+    libsqlite3-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /workspace
