@@ -6,6 +6,9 @@
 
 #include "Handlers/Handler_tilda.h"
 #include "Handlers/Handler_marquiz.h"
+#include "Handlers/Handler_post_raw.h"
+#include "Items.h"
+#include "Logger.h"
 
 namespace beast = boost::beast;
 namespace http = beast::http;
@@ -111,16 +114,30 @@ void start() {
 }
 
 void test() {
-    json::object lead = {
-        {"phone", "232432"},
-        {"email", "7666@dfsrf.ewfe"},
-        {"contacts", {
-            {"phone", "111111"}
-        }}
-    };
 
-    Handler_tilda::checkJsonPostJson(lead);
-    Handler_marquiz::checkJsonPostJson(lead);
+    Logger::open_or_create_db();
+
+    Items item("Handler_get_raw");
+
+    std::string test_msg = "TEST_TEST";
+
+    Logger::insert_info(item, test_msg);
+
+    Logger::close_db();
+
+
+    // json::object lead = {
+    //     {"phone", "232432"},
+    //     {"email", "7666@dfsrf.ewfe"},
+    //     {"contacts", {
+    //         {"phone", "111111"}
+    //     }}
+    // };
+
+    // Handler_tilda::checkJsonPostJson(lead);
+    // Handler_marquiz::checkJsonPostJson(lead);
+
+    // Handler_post_raw::saveJsonToFile(lead);
 
     // std::string json_str = json::serialize(lead);
     // std::cout << json_str << std::endl;
